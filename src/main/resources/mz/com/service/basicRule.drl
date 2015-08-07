@@ -1,7 +1,53 @@
 package mz.com.service;
-rule "basic rule"
+import java.lang.StringBuilder;
+
+global StringBuilder prediction
+
+rule "nAssigment: HIGH"
 when
-    Test( nAssigment == "high" ) // condition
+    Test( nAssigment == "high") // condition
 then
+    prediction.append("PASS");
+    System.out.println("PASS"); // consequence
+end
+
+rule "nAssigment: MEDIUM & nQuiz: LOW"
+when
+    Test( nAssigment == "medium", nQuizz=="low") // condition
+then
+    prediction.append("FAIL");
+    System.out.println("FAIL"); // consequence
+end
+
+rule "nAssigment: MEDIUM & nQuiz: HIGH"
+when
+    Test( nAssigment == "medium", nQuizz=="high") // condition
+then
+    prediction.append("PASS");
+    System.out.println("PASS"); // consequence
+end
+
+
+rule "nAssigment: LOW & nQuiz: LOW"
+when
+    Test( nAssigment == "low", nQuizz=="low") // condition
+then
+    prediction.append("FAIL");
+    System.out.println("FAIL"); // consequence
+end
+
+rule "nAssigment: LOW & nQuiz: MEDIUM"
+when
+    Test( nAssigment == "low", nQuizz=="medium") // condition
+then
+    prediction.append("FAIL");
+    System.out.println("FAIL"); // consequence
+end
+
+rule "nAssigment: LOW & nQuiz: HIGH"
+when
+    Test( nAssigment == "low", nQuizz=="high") // condition
+then
+    prediction.append("PASS");
     System.out.println("PASS"); // consequence
 end

@@ -8,11 +8,14 @@ package mz.com.main;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mz.com.service.PredictionService;
 
 /**
  *
@@ -43,6 +46,30 @@ public class PredictionServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet PredictionServlet at " + request.getContextPath() + "</h1>");
+            
+            String nAssigment = request.getParameter("nAssigment");
+            String nQuizz = request.getParameter("nQuizz");
+            
+            if(nAssigment!=null && nQuizz!=null){
+            
+                PredictionService ps;
+                try {
+                    ps = new PredictionService();
+                    
+                    StringBuilder result = ps.test(nAssigment, nQuizz);
+                    
+                    out.println("<h3> Prediction </h3>");
+                    out.println("<br>");
+                    out.println("<h3>"+result+"</h3>");
+                    
+                } catch (Exception ex) {
+                    Logger.getLogger(PredictionServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+                
+            }
+            
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -59,11 +86,11 @@ public class PredictionServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+//    @Override
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        processRequest(request, response);
+//    }
 
     /**
      * Handles the HTTP <code>POST</code> method.

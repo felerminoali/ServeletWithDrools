@@ -10,7 +10,7 @@
     <body>
         <h1>Hello World!</h1>
         
-        <form action="" method="post">
+        <form action="/ServeltWithDrools/Prediction" method="post">
             nAssigment:
             <select name="nAssigment">
                 <option value="low">low</option>
@@ -18,13 +18,16 @@
                 <option value="high">high</option>
             </select>
             
-            <br>
+            
             nQuiz:
-            <select name="nQuiz">
+            <select name="nQuizz">
                 <option value="low">low</option>
                  <option value="medium">medium</option>
                 <option value="high">high</option>
             </select>
+            
+            
+            <input type="submit" value="submit"/>
             
         </form>
         

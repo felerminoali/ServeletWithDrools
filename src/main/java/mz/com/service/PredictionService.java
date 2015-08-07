@@ -44,9 +44,17 @@ public class PredictionService {
 
     }
 
-    public RESULT executePrediction(String nAssgment, String nQuiz) {
+
+    public StringBuilder test(String nAssgment, String nQuiz) {
 
         Test test = new Test(nAssgment, nQuiz);
+
+        // A good practice is to do it before 
+        //inserting any objects/facts
+        
+        
+        StringBuilder prediction = new StringBuilder("");
+        ksession.setGlobal("prediction", prediction);
 
         ksession.insert(test);
 
@@ -57,46 +65,23 @@ public class PredictionService {
         // logger.close();
         // and then dispose the session
         ksession.dispose();
+        
+        
+        return prediction;
 
-        if (nAssgment.equals("high")) {
-            return RESULT.PASS;
-        } else {
-
-            if (nQuiz.equals("low")) {
-                return RESULT.FAIL;
-            } else {
-                return RESULT.PASS;
-            }
-        }
-
-    }
-
-    public void test(String nAssgment, String nQuiz) {
-
-        Test test = new Test(nAssgment, nQuiz);
-
-        ksession.insert(test);
-
-        // and fire the rules
-        ksession.fireAllRules();
-
-        // Remove comment if using logging
-        // logger.close();
-        // and then dispose the session
-        ksession.dispose();
     }
 
     public static void main(String[] args) {
-        
+
         try {
             PredictionService p = new PredictionService();
-            
-            p.test("high", "low");
-            
-            
+
+            StringBuilder r = p.test("low", "high");
+
+            System.out.println("Result: "+r.toString());
         } catch (Exception ex) {
             Logger.getLogger(PredictionService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 }
