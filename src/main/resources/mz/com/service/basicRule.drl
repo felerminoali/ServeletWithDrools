@@ -1,0 +1,7 @@
+package mz.com.service;
+rule "basic rule"
+when
+    Test( nAssigment == "high" ) // condition
+then
+    System.out.println("PASS"); // consequence
+end
